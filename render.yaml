@@ -1,6 +1,6 @@
 databases:
   - name: app_db
-    databaseName: BackEndAPIContext
+    databaseName: backendapicontext
     user: postgres
     plan: free
 
