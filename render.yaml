@@ -1,7 +1,7 @@
 databases:
   - name: api_db
-    databaseName: BackEndAPIContext
-    user: postgres
+    databaseName: backenddb
+    user: postgresuser
     plan: free
 
 services:
