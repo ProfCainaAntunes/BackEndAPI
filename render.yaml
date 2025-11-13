@@ -1,6 +1,6 @@
 databases:
-  - name: app_db
-    databaseName: backenddb
+  - name: api_db
+    databaseName: BackEndAPIContext
     user: postgres
     plan: free
 
@@ -20,5 +20,5 @@ services:
         value: http://*:10000
       - key: ConnectionStrings__DefaultConnection
         fromDatabase:
-          name: app_db
+          name: api_db
           property: connectionString
