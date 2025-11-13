@@ -4,6 +4,8 @@ using BackEndAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+const string ProductionConnectionStringKey = "ConnectionStrings__DefaultConnection";
+
 // Configure the HTTP request pipeline.
 if (builder.Environment.IsDevelopment())
 {
@@ -12,8 +14,23 @@ if (builder.Environment.IsDevelopment())
 } 
 else
 {
+    var connectionString = builder.Configuration.GetConnectionString(ProductionConnectionStringKey);
+
+    // Se a string ainda não for encontrada, tenta buscar DIRETAMENTE como uma variável de ambiente
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        connectionString = builder.Configuration[ProductionConnectionStringKey];
+    }
+    
+    // Finaliza com erro se a string de conexão real não foi encontrada
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        throw new InvalidOperationException($"Connection string '{ProductionConnectionStringKey}' not found. Please check Render environment variables.");
+    }
+
+    // Configura o DbContext com a string de conexão encontrada
     builder.Services.AddDbContext<BackEndAPIContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionStrings__DefaultConnection") ?? throw new InvalidOperationException("Connection string 'ConnectionStrings__DefaultConnection' not found.")));
+        options.UseNpgsql(connectionString));
 }
 
 builder.Services.AddControllers();

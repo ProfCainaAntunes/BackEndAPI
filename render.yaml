@@ -12,6 +12,9 @@ services:
     autoDeploy: true
     region: oregon
 
+    dependsOn:
+      - app_db
+
     # Informa ao Render que o serviço depende do banco
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
