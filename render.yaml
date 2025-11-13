@@ -18,7 +18,7 @@ services:
         value: Production
       - key: ASPNETCORE_URLS
         value: http://*:10000
-      - key: BackEndAPIContext
+      - key: ConnectionStrings__DefaultConnection
         fromDatabase:
           name: app_db
           property: connectionString
