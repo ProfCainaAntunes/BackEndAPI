@@ -1,7 +1,7 @@
 databases:
   - name: app_db
-    databaseName: apicontext
-    user: postgres_user
+    databaseName: BackEndAPIContext
+    user: postgres
     plan: free
 
 services:
@@ -18,7 +18,7 @@ services:
         value: Production
       - key: ASPNETCORE_URLS
         value: http://*:10000
-      - key: ConnectionStrings__BackEndAPIContext
+      - key: BackEndAPIContext
         fromDatabase:
           name: app_db
           property: connectionString
