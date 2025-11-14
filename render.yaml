@@ -1,18 +1,17 @@
 databases:
-  - name: api_db
-    databaseName: backenddb
+  - name: apidb
+    databaseName: apidb *
     user: postgresuser
     plan: free
 
 services:
   - type: web
-    name: backendapi
+    name: api
     env: docker
     plan: free
     autoDeploy: true
     region: oregon
 
-    # Informa ao Render que o serviço depende do banco
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
@@ -20,5 +19,5 @@ services:
         value: http://*:10000
       - key: ConnectionStrings__DefaultConnection
         fromDatabase:
-          name: api_db
+          name: apidb
           property: connectionString
