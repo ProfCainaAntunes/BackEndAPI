@@ -1,6 +1,6 @@
 databases:
   - name: apidb
-    databaseName: apidb *
+    databaseName: apidb
     user: postgresuser
     plan: free
 
